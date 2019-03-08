@@ -12,5 +12,9 @@
 #include "kv58_ftm.h"
 #include "kv58_adc.h"
 #include "kv58_systick.h"
+#include "kv58_i2c_soft.h"
+
+#include "mpu6050.h"
+#include "oscilloscope.h"
 
 #endif

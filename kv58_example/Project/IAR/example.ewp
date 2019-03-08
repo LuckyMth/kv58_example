@@ -352,6 +352,7 @@
                     <state>$PROJ_DIR$\..\..\Libraries\startup\CMSIS</state>
                     <state>$PROJ_DIR$\..\..\Libraries\startup\startup</state>
                     <state>$PROJ_DIR$\..\USER\inc</state>
+                    <state>$PROJ_DIR$\..\..\Libraries\board\inc</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2077,6 +2078,27 @@
             <data />
         </settings>
     </configuration>
+    <group>
+        <name>board</name>
+        <group>
+            <name>board_c</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\Libraries\board\src\mpu6050.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\Libraries\board\src\oscilloscope.c</name>
+            </file>
+        </group>
+        <group>
+            <name>board_h</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\Libraries\board\inc\mpu6050.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\Libraries\board\inc\oscilloscope.h</name>
+            </file>
+        </group>
+    </group>
     <group>
         <name>drives</name>
         <group>
