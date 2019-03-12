@@ -1,5 +1,5 @@
-#ifndef _PORT_CFG_H_
-#define _PORT_CFG_H_
+#ifndef _KV58_PORT_CFG_H_
+#define _KV58_PORT_CFG_H_
 
 #include "kv58_port.h"
  

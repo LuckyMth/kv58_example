@@ -1,5 +1,5 @@
-#ifndef _PORT_H_
-#define _PORT_H_
+#ifndef _KV58_PORT_H_
+#define _KV58_PORT_H_
 
 #include "MKV58F24.h"
 
@@ -23,12 +23,12 @@ typedef enum _port_mux
     Alt15 = 15U,           /*!< Chip-specific */
 } port_mux_t;
 
+
 typedef enum _port_pull
 {
     pulldown = 0U,
     pullup = 1U,
 } port_pull_t;
-
 
 
 typedef enum _PTXn
@@ -71,6 +71,6 @@ typedef enum _PTn
 
 extern void port_init(PTXn_e ptxn, port_mux_t mux);
 extern void port_pull(PTXn_e ptxn, port_pull_t pull);
-
+extern void port_opendrain(PTXn_e ptxn);
 
 #endif

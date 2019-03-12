@@ -2086,6 +2086,9 @@
                 <name>$PROJ_DIR$\..\..\Libraries\board\src\mpu6050.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\Libraries\board\src\oled.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\Libraries\board\src\oscilloscope.c</name>
             </file>
         </group>
@@ -2093,6 +2096,9 @@
             <name>board_h</name>
             <file>
                 <name>$PROJ_DIR$\..\..\Libraries\board\inc\mpu6050.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\Libraries\board\inc\oled.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\Libraries\board\inc\oscilloscope.h</name>

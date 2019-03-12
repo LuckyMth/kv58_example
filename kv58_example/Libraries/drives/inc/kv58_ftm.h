@@ -1,5 +1,5 @@
-#ifndef _FTM_H_
-#define _FTM_H_
+#ifndef _KV58_FTM_H_
+#define _KV58_FTM_H_
 
 #include "MKV58F24.h"
 

@@ -1,5 +1,5 @@
-#ifndef _LED_H_
-#define _LED_H_
+#ifndef _KV58_LED_H_
+#define _KV58_LED_H_
 
 #include "MKV58F24.h"
 #include "kv58_gpio.h"

@@ -16,5 +16,7 @@
 
 #include "mpu6050.h"
 #include "oscilloscope.h"
+#include "oled.h"
+
 
 #endif

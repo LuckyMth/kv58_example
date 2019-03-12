@@ -14,7 +14,7 @@ int16_t mpu_acc_x,mpu_acc_y,mpu_acc_z;
 //-------------------------------------------------------------------------------------------------------------------
 void InitMPU6050(void)
 {
-    uint8_t aa = simiic_read_reg(MPU6050_DEV_ADDR,WHO_AM_I,IIC);
+    uint8_t aa = simiic_read_reg(MPU6050_DEV_ADDR,WHO_AM_I);
     
     simiic_write_reg(MPU6050_DEV_ADDR, PWR_MGMT_1, 0x00);	   //解除休眠状态
     simiic_write_reg(MPU6050_DEV_ADDR, SMPLRT_DIV, 0x07);      //125HZ采样率
@@ -39,7 +39,7 @@ void Get_AccData(void)
 {
     uint8_t dat[6];
     
-    simiic_read_regs(MPU6050_DEV_ADDR, ACCEL_XOUT_H, dat, 6, IIC);  
+    simiic_read_regs(MPU6050_DEV_ADDR, ACCEL_XOUT_H, dat, 6);  
     mpu_acc_x = (int16_t)(((uint16_t)dat[0]<<8 | dat[1]));
     mpu_acc_y = (int16_t)(((uint16_t)dat[2]<<8 | dat[3]));
     mpu_acc_z = (int16_t)(((uint16_t)dat[4]<<8 | dat[5]));
@@ -57,7 +57,7 @@ void Get_Gyro(void)
 {
     uint8_t dat[6];
     
-    simiic_read_regs(MPU6050_DEV_ADDR, GYRO_XOUT_H, dat, 6, IIC);  
+    simiic_read_regs(MPU6050_DEV_ADDR, GYRO_XOUT_H, dat, 6);  
     mpu_gyro_x = (int16_t)(((uint16_t)dat[0]<<8 | dat[1]));
     mpu_gyro_y = (int16_t)(((uint16_t)dat[2]<<8 | dat[3]));
     mpu_gyro_z = (int16_t)(((uint16_t)dat[4]<<8 | dat[5]));

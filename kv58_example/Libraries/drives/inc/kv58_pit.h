@@ -1,5 +1,5 @@
-#ifndef _PIT_H_
-#define _PIT_H_
+#ifndef _KV58_PIT_H_
+#define _KV58_PIT_H_
 
 #include "MKV58F24.h"
 

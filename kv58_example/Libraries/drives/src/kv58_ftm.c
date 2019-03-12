@@ -182,7 +182,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
     }
     
     /* Setup the channel output behaviour when a match occurs with the compare value */
-    FTMn[ftmn]->CONTROLS[ch].CnSC &= FTM_CnSC_ELSA_MASK;
+    FTMn[ftmn]->CONTROLS[ch].CnSC &= ~FTM_CnSC_ELSA_MASK;
     FTMn[ftmn]->CONTROLS[ch].CnSC = FTM_CnSC_MSB_MASK | FTM_CnSC_ELSB_MASK;
     /* Set the clock prescale factor */
     FTMn[ftmn]->SC |= FTM_SC_PS(7);
@@ -284,9 +284,9 @@ void ftm_quad_init(FTMn_e ftmn)
         break;
     }
     /* Write Protection Disable */
-    FTMn[ftmn]->MODE &= FTM_MODE_WPDIS_MASK;
+    FTMn[ftmn]->MODE |= FTM_MODE_WPDIS_MASK;
     /* Clear To Zero*/
-    FTMn[ftmn]->QDCTRL &= FTM_QDCTRL_QUADMODE_MASK;
+    FTMn[ftmn]->QDCTRL &= ~FTM_QDCTRL_QUADMODE_MASK;
     /* Init */
     FTMn[ftmn]->CNTIN = 0;
     FTMn[ftmn]->MOD = FTM_MOD_MOD_MASK;

@@ -25,4 +25,13 @@ void port_pull(PTXn_e ptxn, port_pull_t pull)
     PORTx[PTX(ptxn)]->PCR[PTn(ptxn)] |= PORT_PCR_PS(pull);
 }
 
+void port_opendrain(PTXn_e ptxn)
+{
+    PORTx[PTX(ptxn)]->PCR[PTn(ptxn)] &= ~PORT_PCR_ODE_MASK;
+    PORTx[PTX(ptxn)]->PCR[PTn(ptxn)] |= PORT_PCR_ODE_MASK;
+}
+
+
+
+
 
