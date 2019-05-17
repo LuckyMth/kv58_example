@@ -1,8 +1,10 @@
 
 #include "kv58_uart.h"
 #include "kv58_port_cfg.h"
-#include "stdio.h"
 #include "kv58_clock.h"
+#include "kv58_port.h"
+#include "stdio.h"
+#include "Parameter.h"
 
 static UART_Type * const UARTn[] = UART_BASE_PTRS;
 
@@ -163,6 +165,16 @@ void uart_deinit(UARTn_e uartn)
     }
 }
 
+//接受单字节
+uint8_t uart_getchar(UARTn_e uartn)
+{
+    while(!(UARTn[uartn]->S1 & UART_S1_RDRF_MASK))
+    {
+    }
+    return UARTn[uartn]->D;
+}
+
+//接受多字节
 void uart_getbuff(UARTn_e uartn, uint8_t *buff, uint32_t len)
 {
     while(len--)
@@ -174,6 +186,7 @@ void uart_getbuff(UARTn_e uartn, uint8_t *buff, uint32_t len)
     }
 }
 
+//发送单字节
 void uart_putchar(UARTn_e uartn, uint8_t ch)
 {
     while(!(UARTn[uartn]->S1 & UART_S1_TDRE_MASK))
@@ -182,6 +195,7 @@ void uart_putchar(UARTn_e uartn, uint8_t ch)
     UARTn[uartn]->D = ch;
 }
 
+//发送多字节
 void uart_putbuff(UARTn_e uartn, uint8_t *buff, uint32_t len)
 {
     while(len--)
@@ -193,6 +207,7 @@ void uart_putbuff(UARTn_e uartn, uint8_t *buff, uint32_t len)
     }
 }
 
+//发送字符串
 void uart_putstr(UARTn_e uartn, const uint8_t *str)
 {
     while(*str)
@@ -201,30 +216,139 @@ void uart_putstr(UARTn_e uartn, const uint8_t *str)
     }
 }
 
+//使能接受中断
 void uart_rx_irq_en(UARTn_e uartn)
 {
     UARTn[uartn]->C2 |= UART_C2_RIE_MASK;
-    NVIC_EnableIRQ((IRQn_Type)((uartn << 1) + UART0_RX_TX_IRQn));  //Multiplied By 2
+    switch(uartn)
+    {
+    case uart0:
+        NVIC_EnableIRQ((IRQn_Type)UART0_RX_TX_IRQn);
+        break;
+    case uart1:
+        NVIC_EnableIRQ((IRQn_Type)UART1_RX_TX_IRQn);
+        break;
+    case uart2:
+        NVIC_EnableIRQ((IRQn_Type)UART2_RX_TX_IRQn);
+        break;
+    case uart3:
+        NVIC_EnableIRQ((IRQn_Type)UART3_RX_TX_IRQn);
+        break;
+    case uart4:
+        NVIC_EnableIRQ((IRQn_Type)UART4_RX_TX_IRQn);
+        break;
+    case uart5:
+        NVIC_EnableIRQ((IRQn_Type)UART5_RX_TX_IRQn);
+        break;
+    }
 }
 
+//使能发送中断
 void uart_tx_irq_en(UARTn_e uartn)
 {
     UARTn[uartn]->C2 |= UART_C2_TIE_MASK;
-    NVIC_EnableIRQ((IRQn_Type)((uartn << 1) + UART0_RX_TX_IRQn));  //Multiplied By 2
+    switch(uartn)
+    {
+    case uart0:
+        NVIC_EnableIRQ((IRQn_Type)UART0_RX_TX_IRQn);
+        break;
+    case uart1:
+        NVIC_EnableIRQ((IRQn_Type)UART1_RX_TX_IRQn);
+        break;
+    case uart2:
+        NVIC_EnableIRQ((IRQn_Type)UART2_RX_TX_IRQn);
+        break;
+    case uart3:
+        NVIC_EnableIRQ((IRQn_Type)UART3_RX_TX_IRQn);
+        break;
+    case uart4:
+        NVIC_EnableIRQ((IRQn_Type)UART4_RX_TX_IRQn);
+        break;
+    case uart5:
+        NVIC_EnableIRQ((IRQn_Type)UART5_RX_TX_IRQn);
+        break;
+    }
 }
 
+//uart0中断服务函数
 void UART0_RX_TX_IRQHandler(void)
 {
+    //接受中断
     if(UARTn[0]->S1 & UART_S1_RDRF_MASK)
     {
-        uart_putchar(uart0,(uint8_t)(UARTn[0]->D));
     }
+    //发送中断
     if(UARTn[0]->S1 & UART_S1_TDRE_MASK)
     {
-    
     }
 }
 
+//uart1中断服务函数
+void UART1_RX_TX_IRQHandler(void)
+{
+    //接受中断
+    if(UARTn[1]->S1 & UART_S1_RDRF_MASK)
+    {
+    }
+    //发送中断
+    if(UARTn[1]->S1 & UART_S1_TDRE_MASK)
+    {
+    }
+}
+
+//uart2中断服务函数
+void UART2_RX_TX_IRQHandler(void)
+{
+    //接受中断
+    if(UARTn[2]->S1 & UART_S1_RDRF_MASK)
+    {
+    }
+    //发送中断
+    if(UARTn[2]->S1 & UART_S1_TDRE_MASK)
+    {
+    }
+}
+
+//uart3中断服务函数
+void UART3_RX_TX_IRQHandler(void)
+{
+    //接受中断
+    if(UARTn[3]->S1 & UART_S1_RDRF_MASK)
+    {
+    }
+    //发送中断
+    if(UARTn[3]->S1 & UART_S1_TDRE_MASK)
+    {
+    }
+}
+
+//uart4中断服务函数
+void UART4_RX_TX_IRQHandler(void)
+{
+    //接受中断
+    if(UARTn[4]->S1 & UART_S1_RDRF_MASK)
+    {
+    }
+    //发送中断
+    if(UARTn[4]->S1 & UART_S1_TDRE_MASK)
+    {
+    }
+}
+
+//uart5中断服务函数
+void UART5_RX_TX_IRQHandler(void)
+{
+    //接受中断
+    if(UARTn[5]->S1 & UART_S1_RDRF_MASK)
+    {
+    }
+    //发送中断
+    if(UARTn[5]->S1 & UART_S1_TDRE_MASK)
+    {
+    }
+}
+
+//重定向printf
 int fputc(int ch,FILE*stream)
 {
     uart_putchar(DEBUG_UART,(char)ch);
