@@ -88,8 +88,23 @@ void uart_init(UARTn_e uartn, uint32_t baud)
         /* Enable uart clock */
         SIM->SCGC1 |= (SIM_SCGC1_UART4_MASK);
         
-        port_init(UART4_RX_PIN,Alt8);
-        port_init(UART4_TX_PIN,Alt9);
+        if(PTC14==UART4_RX_PIN)
+        {
+            port_init(UART4_RX_PIN,Alt9);
+        }
+        else if(PTE25==UART4_RX_PIN)
+        {
+            port_init(UART4_RX_PIN,Alt8);
+        }
+
+        if(PTC15==UART4_TX_PIN)
+        {
+            port_init(UART4_TX_PIN,Alt9);
+        }
+        else if(PTE24==UART4_TX_PIN)
+        {
+            port_init(UART4_TX_PIN,Alt8);
+        }
         break;
         
     case uart5:
@@ -276,6 +291,7 @@ void UART0_RX_TX_IRQHandler(void)
     //接受中断
     if(UARTn[0]->S1 & UART_S1_RDRF_MASK)
     {
+        uart_putchar(uart0,(uint8_t)(UARTn[0]->D));
     }
     //发送中断
     if(UARTn[0]->S1 & UART_S1_TDRE_MASK)
@@ -289,6 +305,7 @@ void UART1_RX_TX_IRQHandler(void)
     //接受中断
     if(UARTn[1]->S1 & UART_S1_RDRF_MASK)
     {
+        uart_putchar(uart1,(uint8_t)(UARTn[1]->D));
     }
     //发送中断
     if(UARTn[1]->S1 & UART_S1_TDRE_MASK)
@@ -302,6 +319,7 @@ void UART2_RX_TX_IRQHandler(void)
     //接受中断
     if(UARTn[2]->S1 & UART_S1_RDRF_MASK)
     {
+        uart_putchar(uart2,(uint8_t)(UARTn[2]->D));
     }
     //发送中断
     if(UARTn[2]->S1 & UART_S1_TDRE_MASK)
@@ -312,9 +330,22 @@ void UART2_RX_TX_IRQHandler(void)
 //uart3中断服务函数
 void UART3_RX_TX_IRQHandler(void)
 {
+    static uint8_t count = 0;
+    static uint8_t data[2] = {0};
     //接受中断
     if(UARTn[3]->S1 & UART_S1_RDRF_MASK)
     {
+        if(count==0)
+        {
+            data[1] = uart_getchar(uart3);
+            count=1;
+        }
+        else if(count==1)
+        {
+            data[0] = uart_getchar(uart3);
+            ss = (data[1]<<8) + data[0];
+            count=0;
+        }
     }
     //发送中断
     if(UARTn[3]->S1 & UART_S1_TDRE_MASK)
@@ -328,6 +359,7 @@ void UART4_RX_TX_IRQHandler(void)
     //接受中断
     if(UARTn[4]->S1 & UART_S1_RDRF_MASK)
     {
+        uart_putchar(uart4,(uint8_t)(UARTn[4]->D));
     }
     //发送中断
     if(UARTn[4]->S1 & UART_S1_TDRE_MASK)
@@ -341,6 +373,7 @@ void UART5_RX_TX_IRQHandler(void)
     //接受中断
     if(UARTn[5]->S1 & UART_S1_RDRF_MASK)
     {
+        uart_putchar(uart5,(uint8_t)(UARTn[5]->D));
     }
     //发送中断
     if(UARTn[5]->S1 & UART_S1_TDRE_MASK)
